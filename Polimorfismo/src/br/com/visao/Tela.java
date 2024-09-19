@@ -4,8 +4,12 @@
  */
 package br.com.visao;
 
+import br.com.controle.Divisao;
+import br.com.controle.Media;
+import br.com.controle.Multiplicacao;
 import br.com.controle.OperacaoMatematica;
 import br.com.controle.Soma;
+import br.com.controle.Subtracao;
 
 /**
  *
@@ -40,6 +44,10 @@ public class Tela extends javax.swing.JFrame {
         jTvalor2 = new javax.swing.JTextField();
         jBsomar = new javax.swing.JButton();
         jLresultado = new javax.swing.JLabel();
+        jBsubtrair = new javax.swing.JButton();
+        jBdividir = new javax.swing.JButton();
+        jBmultiplicar = new javax.swing.JButton();
+        jBmedia = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,28 +64,68 @@ public class Tela extends javax.swing.JFrame {
 
         jLresultado.setText("0.00");
 
+        jBsubtrair.setText("-");
+        jBsubtrair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBsubtrairActionPerformed(evt);
+            }
+        });
+
+        jBdividir.setText("/");
+        jBdividir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBdividirActionPerformed(evt);
+            }
+        });
+
+        jBmultiplicar.setText("*");
+        jBmultiplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmultiplicarActionPerformed(evt);
+            }
+        });
+
+        jBmedia.setText("media");
+        jBmedia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBmediaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTvalor2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTvalor1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jBsomar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLresultado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jTvalor2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jBsubtrair, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTvalor1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jBsomar, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLresultado, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(174, Short.MAX_VALUE))
+                                .addComponent(jBdividir, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jBmultiplicar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(161, 161, 161)
+                        .addComponent(jBmedia)))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,8 +139,14 @@ public class Tela extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jTvalor2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
-                .addComponent(jBsomar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBsomar)
+                    .addComponent(jBsubtrair)
+                    .addComponent(jBdividir)
+                    .addComponent(jBmultiplicar))
+                .addGap(18, 18, 18)
+                .addComponent(jBmedia)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLresultado)
                 .addGap(110, 110, 110))
         );
@@ -106,6 +160,34 @@ public class Tela extends javax.swing.JFrame {
         double pvalor2 = Double.valueOf(jTvalor2.getText());
         jLresultado.setText("soma " +calcule(new Soma(),pvalor1, pvalor2));
     }//GEN-LAST:event_jBsomarActionPerformed
+
+    private void jBsubtrairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBsubtrairActionPerformed
+        // TODO add your handling code here:
+        double pvalor1 = Double.valueOf(jTvalor1.getText());
+        double pvalor2 = Double.valueOf(jTvalor2.getText());
+        jLresultado.setText("subtracao "+calcule(new Subtracao(), pvalor1, pvalor2));
+    }//GEN-LAST:event_jBsubtrairActionPerformed
+
+    private void jBdividirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBdividirActionPerformed
+        // TODO add your handling code here:
+        double pvalor1 = Double.valueOf(jTvalor1.getText());
+        double pvalor2 = Double.valueOf(jTvalor2.getText());
+        jLresultado.setText("divisao "+calcule(new Divisao(), pvalor1, pvalor2));
+    }//GEN-LAST:event_jBdividirActionPerformed
+
+    private void jBmultiplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmultiplicarActionPerformed
+        // TODO add your handling code here:
+        double pvalor1 = Double.valueOf(jTvalor1.getText());
+        double pvalor2 = Double.valueOf(jTvalor2.getText());
+        jLresultado.setText("multiplicacao "+calcule(new Multiplicacao(), pvalor1, pvalor2));
+    }//GEN-LAST:event_jBmultiplicarActionPerformed
+
+    private void jBmediaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBmediaActionPerformed
+        // TODO add your handling code here:
+        double pvalor1 = Double.valueOf(jTvalor1.getText());
+        double pvalor2 = Double.valueOf(jTvalor2.getText());
+        jLresultado.setText("media "+calcule(new Media(), pvalor1, pvalor2));
+    }//GEN-LAST:event_jBmediaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -143,7 +225,11 @@ public class Tela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBdividir;
+    private javax.swing.JButton jBmedia;
+    private javax.swing.JButton jBmultiplicar;
     private javax.swing.JButton jBsomar;
+    private javax.swing.JButton jBsubtrair;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLresultado;
